@@ -5,6 +5,8 @@ class TaskMailer < ApplicationMailer
   def task_assignment
     @data = params
     users = params.keys
-    mail(to: users, subject: "Weekly Chore Lottery")
+    users.each do |user|
+      mail(to: user, subject: "Weekly Chore Lottery")
+    end
   end
 end
