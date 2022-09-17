@@ -1,0 +1,10 @@
+production:
+  # Some prod config here
+
+development:
+  raise_delivery_errors: true
+  domain: localhost
+  perform_deliveries: true
+
+test:
+  delivery_method: test
