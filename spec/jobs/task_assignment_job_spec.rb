@@ -8,6 +8,9 @@ RSpec.describe TaskAssignmentJob, type: :job do
   let!(:task2) { create(:task) }
   let!(:task3) { create(:task) }
   let!(:task4) { create(:task) }
+  let!(:task5) { create(:task) }
+  let!(:task6) { create(:task) }
+
 
   let!(:user1) { create(:user) }
   let!(:user2) { create(:user) }
@@ -17,6 +20,9 @@ RSpec.describe TaskAssignmentJob, type: :job do
   context 'perform' do
     it 'performs job' do
       described_class.perform_now
+      expect(ActionMailer::Base.deliveries.count).to eq(1)
+      attachment = ActionMailer::Base.deliveries.first
+      expect(ActionMailer::Base.deliveries.first.subject).to eq("Weekly Chore Lottery")
     end
   end
 end

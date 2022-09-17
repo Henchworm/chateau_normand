@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 class TaskAssigner
-  attr_accessor :roomies, :tasks
+  attr_accessor :roomies, :tasks, :assignment
 
   def initialize
     @roomies = User.all.pluck(:email)
     @tasks = Task.all.pluck(:name)
+    @assignment = {}
   end
 
   def self.call
@@ -18,10 +19,13 @@ class TaskAssigner
   end
 
   def assign_tasks
-    assignment = Hash.new(0)
     shuffled = @tasks.shuffle
-    @roomies.each do |roomie|
-      assignment[roomie] = shuffled.pop
+    until shuffled.empty?
+      @roomies.shuffle.each do |roomie|
+        assignment[roomie] ||= []
+        assignment[roomie] << shuffled.pop
+        assignment[roomie].compact!
+      end
     end
     assignment
   end

@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :task do
-    name { Faker::Games::Fallout.quote }
+    name { Faker::TvShows::Seinfeld.business }
   end
 end
