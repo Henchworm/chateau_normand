@@ -1,4 +1,3 @@
 class TwilioController < ApplicationController
-  def sms
-  end
+  def sms; end
 end
