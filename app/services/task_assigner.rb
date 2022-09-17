@@ -13,7 +13,8 @@ class TaskAssigner
   end
 
   def call
-    assign_tasks
+    task_data = assign_tasks
+    send_mail(task_data)
   end
 
   def assign_tasks
@@ -23,5 +24,9 @@ class TaskAssigner
       assignment[roomie] = shuffled.pop
     end
     assignment
+  end
+
+  def send_mail(task_data)
+    TaskMailer.with(task_data).task_assignment.deliver_now
   end
 end
