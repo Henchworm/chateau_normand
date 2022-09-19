@@ -27,7 +27,6 @@ class TaskAssigner
         assignment[roomie].compact!
       end
     end
-    binding.pry
     assignment
   end
 
