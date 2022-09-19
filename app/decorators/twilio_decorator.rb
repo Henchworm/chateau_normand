@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TwilioDecorator < Draper::Decorator
   delegate_all
 

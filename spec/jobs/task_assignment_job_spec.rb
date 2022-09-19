@@ -11,7 +11,6 @@ RSpec.describe TaskAssignmentJob, type: :job do
   let!(:task5) { create(:task) }
   let!(:task6) { create(:task) }
 
-
   let!(:user1) { create(:user) }
   let!(:user2) { create(:user) }
   let!(:user3) { create(:user) }
@@ -22,7 +21,7 @@ RSpec.describe TaskAssignmentJob, type: :job do
       described_class.perform_now
       expect(ActionMailer::Base.deliveries.count).to eq(1)
       attachment = ActionMailer::Base.deliveries.first
-      expect(ActionMailer::Base.deliveries.first.subject).to eq("Weekly Chore Lottery")
+      expect(ActionMailer::Base.deliveries.first.subject).to eq('Weekly Chore Lottery')
     end
   end
 end

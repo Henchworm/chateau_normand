@@ -4,7 +4,7 @@ class TaskAssigner
   attr_accessor :roomies, :tasks, :assignment
 
   def initialize
-    @roomies = User.all.pluck(:email)
+    @roomies = User.all.pluck(:name)
     @tasks = Task.all.pluck(:name)
     @assignment = {}
   end
