@@ -16,6 +16,7 @@ class TaskAssigner
   def call
     task_data = assign_tasks
     send_mail(task_data)
+    send_text(task_data)
   end
 
   def assign_tasks
@@ -32,5 +33,9 @@ class TaskAssigner
 
   def send_mail(task_data)
     TaskMailer.with(task_data).task_assignment.deliver_now
+  end
+
+  def send_text(task_data)
+    TwilioTextMessenger.new(task_data).call
   end
 end
