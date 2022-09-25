@@ -6,15 +6,17 @@ class TwilioTextMessenger
   end
 
   def phone_numbers
-    User.all.pluck(phone_number)
+    User.all.pluck(:phone_number)
   end
 
   def call
     client = Twilio::REST::Client.new
-    client.messages.create(
+    phone_numbers.each do |number|
+      client.messages.create(
         from: ENV['TWILIO_PHONE_NUMBER'],
-        to: '15597995639',
+        to: number,
         body: "The weekly chore assignments are below: #{message}"
       )
+    end
   end
 end
