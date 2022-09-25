@@ -19,7 +19,7 @@ RSpec.describe TaskAssignmentJob, type: :job do
   context 'perform' do
     it 'performs job' do
       described_class.perform_now
-      allow_any_instance_of(TwilioTextMessenger).to receive(:call).and_return("Test!")
+      # allow_any_instance_of(Twilio::REST::Client).to receieve(:post).and_return("Test!")
       expect(ActionMailer::Base.deliveries.count).to eq(1)
       attachment = ActionMailer::Base.deliveries.first
       expect(ActionMailer::Base.deliveries.first.subject).to eq('Weekly Chore Lottery')

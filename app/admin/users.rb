@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation, :name
+  permit_params :email, :password, :password_confirmation, :name, :phone_number
 
   index do
     selectable_column
@@ -24,6 +24,7 @@ ActiveAdmin.register User do
       f.input :password
       f.input :password_confirmation
       f.input :name
+      f.input :phone_number
     end
     f.actions
   end
