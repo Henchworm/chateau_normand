@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_220_924_232_110) do
+ActiveRecord::Schema[7.0].define(version: 20_221_007_040_535) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -26,6 +26,12 @@ ActiveRecord::Schema[7.0].define(version: 20_220_924_232_110) do
     t.index %w[author_type author_id], name: 'index_active_admin_comments_on_author'
     t.index ['namespace'], name: 'index_active_admin_comments_on_namespace'
     t.index %w[resource_type resource_id], name: 'index_active_admin_comments_on_resource'
+  end
+
+  create_table 'runs', force: :cascade do |t|
+    t.jsonb 'data'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
   end
 
   create_table 'tasks', force: :cascade do |t|
@@ -44,6 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 20_220_924_232_110) do
     t.datetime 'updated_at', null: false
     t.string 'name'
     t.string 'phone_number'
+    t.string 'strava_code'
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
   end

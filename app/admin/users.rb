@@ -1,17 +1,13 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  permit_params :email, :password, :password_confirmation, :name, :phone_number
+  permit_params :email, :password, :password_confirmation, :name, :phone_number, :code
 
-  index do
-    selectable_column
-    id_column
-    column :email
-    column :current_sign_in_at
-    column :sign_in_count
-    column :created_at
-    actions
+
+  action_item only: :show do
+    link_to 'Authorize', "http://www.strava.com/oauth/authorize?client_id=#{ENV['STRAVA_CLIENT']}&response_type=code&redirect_uri=http://localhost:3000/admin/users/&approval_prompt=auto&scope=activity:read_all"
   end
+
 
   filter :email
   filter :current_sign_in_at

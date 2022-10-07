@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'twilio/sms'
   devise_for :users, ActiveAdmin::Devise.config
   root to: 'admin/dashboard#index'
+  get '/oauth2-callback', to: 'oauth#oauth_callback'
   ActiveAdmin.routes(self)
 
   # post ‘/twilio/sms’

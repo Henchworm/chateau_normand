@@ -16,6 +16,11 @@ module ChateauNormand
     config.time_zone = 'Mountain Time (US & Canada)'
     config.eager_load_paths += %W[#{config.root}/lib]
 
+    config.x.oauth.client_id = ENV['STRAVA_CLIENT']
+    config.x.oauth.client_secret = ENV['STRAVA_SECRET']
+    config.x.oauth.idp_url = 'http://localhost:3000/'
+    config.x.oauth.redirect_uri = 'http://localhost:3000/oauth2-callback'
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
