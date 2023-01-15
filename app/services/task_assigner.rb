@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 class TaskAssigner
-  attr_accessor :roomies, :tasks, :assignment
+  attr_accessor :roomies, :tasks, :task_data
 
   def initialize
-    @roomies = User.all.pluck(:name)
-    @tasks = Task.all.pluck(:name)
-    @assignment = {}
+    @roomies = User.all
+    @tasks = Task.all
   end
 
   def self.call
@@ -14,21 +13,29 @@ class TaskAssigner
   end
 
   def call
-    task_data = assign_tasks
+    clear_existing_tasks
+    assign_tasks
+    @task_data = build_hash
     send_mail(task_data)
     send_text(task_data)
   end
 
+  def clear_existing_tasks
+    roomies.each { |roomie| roomie.tasks.delete_all }
+  end
+
   def assign_tasks
-    shuffled = @tasks.shuffle
-    until shuffled.empty?
-      @roomies.shuffle.each do |roomie|
-        assignment[roomie] ||= []
-        assignment[roomie] << shuffled.pop
-        assignment[roomie].compact!
-      end
+    tasks.shuffle.zip(roomies.shuffle.cycle).each do |task, user|
+      user.tasks << task
     end
-    assignment
+  end
+
+  def build_hash
+    task_hash = Hash.new(0)
+    roomies.each do |roomie|
+      task_hash["#{roomie.name}"] = roomie.tasks.pluck(:name)
+    end
+    task_hash
   end
 
   def send_mail(task_data)

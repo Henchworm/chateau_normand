@@ -3,9 +3,9 @@
 ActiveAdmin.register User do
   permit_params :email, :password, :password_confirmation, :name, :phone_number, :code
 
-
   action_item only: :show do
-    link_to 'Authorize', "http://www.strava.com/oauth/authorize?client_id=#{ENV['STRAVA_CLIENT']}&response_type=code&redirect_uri=http://localhost:3000/admin/users/#{params[:id]}&approval_prompt=auto&scope=activity:read_all"
+    link_to 'Authorize',
+            "http://www.strava.com/oauth/authorize?client_id=#{ENV['STRAVA_CLIENT']}&response_type=code&redirect_uri=http://localhost:3000/admin/users/#{params[:id]}&approval_prompt=auto&scope=activity:read_all"
   end
 
   show do
