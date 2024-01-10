@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+A fun 'chore wheel' project that I created using some knowledge I gained from my time at a fintech startup. 
+The application uses a background worker to send text and emails to my roommates, assigning them chores every Monday. 
+The UI is used for modifying chores/users. 
